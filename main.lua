@@ -20,9 +20,15 @@ local function ReconstructTable(Table)
                 end
             elseif type(TableIndexIteration) == "number" then
                 if i == IndexCount then
-                    print(TableIndexIteration)
+                    print(TableIndexIteration) -- gotta do it this way or output is inf
                 else
-                    print(TableIndexIteration .. ",")
+                    print(TableIndexIteration .. ",") -- gotta do it this way or output is inf
+                end
+            elseif type(TableIndexIteration) == "boolean" then
+                if i == IndexCount then
+                    print(tostring(TableIndexIteration))
+                else
+                    print(tostring(TableIndexIteration) .. ",")
                 end
             else
                 print("Unable to obtain the type of this iteration")
