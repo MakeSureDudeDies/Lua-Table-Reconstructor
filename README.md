@@ -7,7 +7,9 @@ testtable = {
     "The Missile Knows Where It Is.",
     "To be, or not to be, that is the question.",
     4,
-    math.huge
+    math.huge,
+    true,
+    false
 }
 
 ReconstructTable(testtable)
@@ -15,7 +17,7 @@ ReconstructTable(testtable)
 
 # Output
 ```
-Indexes: 5
+Indexes: 7
 Reconstructed table:
 
 SomeTable = {
@@ -23,6 +25,8 @@ SomeTable = {
 "The Missile Knows Where It Is.",
 "To be, or not to be, that is the question.",
 4,
-math.huge
+math.huge,
+true,
+false
 }
 ```
