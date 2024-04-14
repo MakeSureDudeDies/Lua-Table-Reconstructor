@@ -1,11 +1,15 @@
-local function ReconstructTable(Table)
+function GetTableLength(Table)
+    local Count = 0
+    for i, v in pairs(Table) do
+        Count = Count + 1
+    end
+    return Count
+end
+
+local function ReconstructTableCore(Table, DoRandom, NameIfDefined, Time, IsInsideMainTable)
     if type(Table) == "table" then
-        local IndexCount = #Table
-        local NaN = 0/0
-        print("Indexes: " .. IndexCount .. "\n") -- Number of indexes in said table
-        print("Reconstructed table:\n")
-        print("SomeTable = {") -- There's no way to get the table name if it's a local, after compilation the table name is lost.
-        for i = 1,IndexCount do
+        local IndexCount = GetTableLength(Table)
+        for i,v in pairs(Table) do
             local TableIndexIteration = Table[i]
             if type(TableIndexIteration) == "string" then
                 if i == IndexCount then
@@ -37,12 +41,31 @@ local function ReconstructTable(Table)
                 else
                     print(tostring(TableIndexIteration) .. ",")
                 end
+            elseif type(TableIndexIteration) == "table" then
+                if i == IndexCount then
+                    print("Reconstructing tables is not yet supported.")
+                else -- always passes to this because cannot get the index of it.
+                    print("Reconstructing tables is not yet supported.,")
+                end
             else
                 print("Unable to obtain the type of this iteration")
             end
         end
-        print("}")
+        if IsInsideMainTable then
+            print("},")
+        else
+            print("}")
+        end
     else
         print("The given argument is not a table")
     end
+end
+
+function ReconstructTable(Table)
+    local IndexCount = GetTableLength(Table)
+    local TimeTable = os.date("*t", os.time())
+    print("Reconstructed at: " .. TimeTable.day .. "." .. TimeTable.month .. "." .. TimeTable.year .. " " .. TimeTable.hour .. ":" .. TimeTable.min .. " - Unix Time")
+    print("Indexes: " .. IndexCount) -- Number of indexes in said table
+    print("Reconstructed table:\n")
+    ReconstructTableCore(Table, true, nil, os.time(), false)
 end
