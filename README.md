@@ -9,7 +9,8 @@ testtable = {
     4,
     math.huge,
     true,
-    false
+    false,
+    0/0
 }
 
 ReconstructTable(testtable)
@@ -17,7 +18,8 @@ ReconstructTable(testtable)
 
 # Output
 ```
-Indexes: 7
+Indexes: 8
+
 Reconstructed table:
 
 SomeTable = {
@@ -27,6 +29,7 @@ SomeTable = {
 4,
 math.huge,
 true,
-false
+false,
+0/0
 }
 ```
