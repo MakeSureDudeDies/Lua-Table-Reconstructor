@@ -1,7 +1,8 @@
 local function ReconstructTable(Table)
     if type(Table) == "table" then
         local IndexCount = #Table
-        print("Indexes: " .. IndexCount) -- Number of indexes in said table
+        local NaN = 0/0
+        print("Indexes: " .. IndexCount .. "\n") -- Number of indexes in said table
         print("Reconstructed table:\n")
         print("SomeTable = {") -- There's no way to get the table name if it's a local, after compilation the table name is lost.
         for i = 1,IndexCount do
@@ -17,6 +18,12 @@ local function ReconstructTable(Table)
                     print("math.huge") -- gotta do it this way or output is inf
                 else
                     print("math.huge" .. ",") -- gotta do it this way or output is inf
+                end
+            elseif type(TableIndexIteration) == "number" and tostring(TableIndexIteration) == "-nan" then -- Only way i could think of.
+                if i == IndexCount then
+                    print("0/0") -- gotta do it this way or output is inf
+                else
+                    print("0/0" .. ",") -- gotta do it this way or output is inf
                 end
             elseif type(TableIndexIteration) == "number" then
                 if i == IndexCount then
