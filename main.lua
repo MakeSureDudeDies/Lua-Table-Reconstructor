@@ -21,15 +21,21 @@ local function ReconstructTableCore(Table, Seed, IsInsideMainTable)
                 end
             elseif type(TableIndexIteration) == "number" and TableIndexIteration == math.huge then
                 if i == IndexCount then
-                    print("math.huge") -- gotta do it this way or output is inf
+                    print("math.huge") -- gotta do it this way or output is "inf"
                 else
-                    print("math.huge" .. ",") -- gotta do it this way or output is inf
+                    print("math.huge" .. ",") -- gotta do it this way or output is "inf"
                 end
             elseif type(TableIndexIteration) == "number" and tostring(TableIndexIteration) == "-nan" or tostring(TableIndexIteration) == "nan" then -- Only way i could think of. 5.3 is -nan 5.4 is nan
                 if i == IndexCount then
-                    print("0/0") -- gotta do it this way or output is inf
+                    print("0/0")
                 else
-                    print("0/0" .. ",") -- gotta do it this way or output is inf
+                    print("0/0" .. ",")
+                end
+            elseif type(TableIndexIteration) == "number" and tostring(TableIndexIteration) == math.pi then
+                if i == IndexCount then
+                    print("math.pi")
+                else
+                    print("math.pi" .. ",")
                 end
             elseif type(TableIndexIteration) == "number" then
                 if i == IndexCount then
@@ -45,9 +51,15 @@ local function ReconstructTableCore(Table, Seed, IsInsideMainTable)
                 end
             elseif type(TableIndexIteration) == "table" then
                 if i == IndexCount then
-                    print("Reconstructing tables is not yet supported.")
+                    print("\"" .. tostring(TableIndexIteration) .. "\"")
                 else -- always passes to this because cannot get the index of it. TODO: figure out a way and do a recursive call to ReconstructTableCore
-                    print("Reconstructing tables is not yet supported.,")
+                    print("\"" .. tostring(TableIndexIteration) .. "\"" .. ",")
+                end
+            elseif type(TableIndexIteration) == "userdata" then
+                if i == IndexCount then
+                    print("\"" .. tostring(TableIndexIteration) .. "\"")
+                else
+                    print("\"" .. tostring(TableIndexIteration) .. "\"" .. ",")
                 end
             else
                 print("Unable to obtain the type of this iteration")
