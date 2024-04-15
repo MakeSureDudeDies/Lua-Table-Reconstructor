@@ -18,11 +18,11 @@ ReconstructTable(testtable)
 
 # Output
 ```
-Indexes: 8
+-- Reconstructed at: 15.4.2024 13:4 - Unix Time
+-- Indexes: 8
+-- Reconstructed table:
 
-Reconstructed table:
-
-SomeTable = {
+SomeTable55 = {
 "About that beer i owed ya!",
 "The Missile Knows Where It Is.",
 "To be, or not to be, that is the question.",
