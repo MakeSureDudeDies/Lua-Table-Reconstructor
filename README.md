@@ -34,6 +34,8 @@ true,
 false,
 0/0,
 math.pi,
-"table: 0x564e2abac1c0",
+a = {
+1
+},
 }
 ```
