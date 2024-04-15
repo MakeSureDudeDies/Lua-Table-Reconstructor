@@ -17,7 +17,7 @@ ReconstructTable(testtable)
 ```
 
 # Output
-```
+```lua
 -- Reconstructed at: 15.4.2024 13:4 - Unix Time
 -- Indexes: 8
 -- Reconstructed table:
