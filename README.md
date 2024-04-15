@@ -10,7 +10,9 @@ testtable = {
     math.huge,
     true,
     false,
-    0/0
+    0/0,
+    math.pi,
+    a = {1}
 }
 
 ReconstructTable(testtable)
@@ -18,11 +20,11 @@ ReconstructTable(testtable)
 
 # Output
 ```lua
--- Reconstructed at: 15.4.2024 13:4 - Unix Time
--- Indexes: 8
+-- Reconstructed at: 15.4.2024 18:27 - Unix Time
+-- Indexes: 10
 -- Reconstructed table:
 
-SomeTable55 = {
+SomeTable24 = {
 "About that beer i owed ya!",
 "The Missile Knows Where It Is.",
 "To be, or not to be, that is the question.",
@@ -30,6 +32,8 @@ SomeTable55 = {
 math.huge,
 true,
 false,
-0/0
+0/0,
+math.pi,
+"table: 0x564e2abac1c0",
 }
 ```
