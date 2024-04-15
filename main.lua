@@ -83,17 +83,3 @@ function ReconstructTable(Table)
     print("-- Reconstructed table:\n")
     ReconstructTableCore(Table, os.time(), false) -- Seed based of off unix time.
 end
-
-testtable = {
-    "About that beer i owed ya!",
-    "The Missile Knows Where It Is.",
-    "To be, or not to be, that is the question.",
-    4,
-    math.huge,
-    true,
-    false,
-    0/0,
-    math.pi
-}
-
-ReconstructTable(testtable)
