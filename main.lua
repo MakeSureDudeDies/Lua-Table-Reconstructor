@@ -6,11 +6,11 @@ function GetTableLength(Table)
     return Count
 end
 
-local function ReconstructTableCore(Table, Seed, IsInsideMainTable)
+local function ReconstructTableCore(Table, NewTableName, IsInsideMainTable)
     if type(Table) == "table" then
         local IndexCount = GetTableLength(Table)
-        math.randomseed(Seed)
-        print("SomeTable" .. math.random(1,100) .. " = {")
+        math.randomseed(os.time())
+        print(NewTableName .. " = {")
         for i,v in pairs(Table) do
             local TableIndexIteration = Table[i]
             if type(TableIndexIteration) == "string" then
@@ -50,11 +50,7 @@ local function ReconstructTableCore(Table, Seed, IsInsideMainTable)
                     print(tostring(TableIndexIteration) .. ",")
                 end
             elseif type(TableIndexIteration) == "table" then
-                if i == IndexCount then
-                    print("\"" .. tostring(TableIndexIteration) .. "\"")
-                else -- always passes to this because cannot get the index of it. TODO: figure out a way and do a recursive call to ReconstructTableCore
-                    print("\"" .. tostring(TableIndexIteration) .. "\"" .. ",")
-                end
+                ReconstructTableCore(v, i, true) -- Recursive call.
             elseif type(TableIndexIteration) == "userdata" then
                 if i == IndexCount then
                     print("\"" .. tostring(TableIndexIteration) .. "\"")
@@ -81,5 +77,5 @@ function ReconstructTable(Table)
     print("-- Reconstructed at: " .. TimeTable.day .. "." .. TimeTable.month .. "." .. TimeTable.year .. " " .. TimeTable.hour .. ":" .. TimeTable.min .. " - Unix Time")
     print("-- Indexes: " .. IndexCount) -- Number of indexes in said table
     print("-- Reconstructed table:\n")
-    ReconstructTableCore(Table, os.time(), false) -- Seed based of off unix time.
+    ReconstructTableCore(Table, "SomeTable" .. math.random(1,100), false) -- Seed based of off unix time.
 end
