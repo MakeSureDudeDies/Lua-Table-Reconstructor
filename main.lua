@@ -6,9 +6,11 @@ function GetTableLength(Table)
     return Count
 end
 
-local function ReconstructTableCore(Table, DoRandom, NameIfDefined, Time, IsInsideMainTable)
+local function ReconstructTableCore(Table, Seed, IsInsideMainTable)
     if type(Table) == "table" then
         local IndexCount = GetTableLength(Table)
+        math.randomseed(Seed)
+        print("SomeTable" .. math.random(1,100) .. " = {")
         for i,v in pairs(Table) do
             local TableIndexIteration = Table[i]
             if type(TableIndexIteration) == "string" then
@@ -23,7 +25,7 @@ local function ReconstructTableCore(Table, DoRandom, NameIfDefined, Time, IsInsi
                 else
                     print("math.huge" .. ",") -- gotta do it this way or output is inf
                 end
-            elseif type(TableIndexIteration) == "number" and tostring(TableIndexIteration) == "-nan" then -- Only way i could think of.
+            elseif type(TableIndexIteration) == "number" and tostring(TableIndexIteration) == "-nan" or tostring(TableIndexIteration) == "nan" then -- Only way i could think of. 5.3 is -nan 5.4 is nan
                 if i == IndexCount then
                     print("0/0") -- gotta do it this way or output is inf
                 else
@@ -44,7 +46,7 @@ local function ReconstructTableCore(Table, DoRandom, NameIfDefined, Time, IsInsi
             elseif type(TableIndexIteration) == "table" then
                 if i == IndexCount then
                     print("Reconstructing tables is not yet supported.")
-                else -- always passes to this because cannot get the index of it.
+                else -- always passes to this because cannot get the index of it. TODO: figure out a way and do a recursive call to ReconstructTableCore
                     print("Reconstructing tables is not yet supported.,")
                 end
             else
@@ -64,8 +66,8 @@ end
 function ReconstructTable(Table)
     local IndexCount = GetTableLength(Table)
     local TimeTable = os.date("*t", os.time())
-    print("Reconstructed at: " .. TimeTable.day .. "." .. TimeTable.month .. "." .. TimeTable.year .. " " .. TimeTable.hour .. ":" .. TimeTable.min .. " - Unix Time")
-    print("Indexes: " .. IndexCount) -- Number of indexes in said table
-    print("Reconstructed table:\n")
-    ReconstructTableCore(Table, true, nil, os.time(), false)
+    print("-- Reconstructed at: " .. TimeTable.day .. "." .. TimeTable.month .. "." .. TimeTable.year .. " " .. TimeTable.hour .. ":" .. TimeTable.min .. " - Unix Time")
+    print("-- Indexes: " .. IndexCount) -- Number of indexes in said table
+    print("-- Reconstructed table:\n")
+    ReconstructTableCore(Table, os.time(), false) -- Seed based of off unix time.
 end
