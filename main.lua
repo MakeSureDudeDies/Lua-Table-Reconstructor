@@ -31,7 +31,7 @@ local function ReconstructTableCore(Table, Seed, IsInsideMainTable)
                 else
                     print("0/0" .. ",")
                 end
-            elseif type(TableIndexIteration) == "number" and tostring(TableIndexIteration) == math.pi then
+            elseif type(TableIndexIteration) == "number" and tonumber(TableIndexIteration) == math.pi then
                 if i == IndexCount then
                     print("math.pi")
                 else
@@ -39,9 +39,9 @@ local function ReconstructTableCore(Table, Seed, IsInsideMainTable)
                 end
             elseif type(TableIndexIteration) == "number" then
                 if i == IndexCount then
-                    print(TableIndexIteration) -- gotta do it this way or output is inf
+                    print(TableIndexIteration)
                 else
-                    print(TableIndexIteration .. ",") -- gotta do it this way or output is inf
+                    print(TableIndexIteration .. ",") 
                 end
             elseif type(TableIndexIteration) == "boolean" then
                 if i == IndexCount then
@@ -83,3 +83,17 @@ function ReconstructTable(Table)
     print("-- Reconstructed table:\n")
     ReconstructTableCore(Table, os.time(), false) -- Seed based of off unix time.
 end
+
+testtable = {
+    "About that beer i owed ya!",
+    "The Missile Knows Where It Is.",
+    "To be, or not to be, that is the question.",
+    4,
+    math.huge,
+    true,
+    false,
+    0/0,
+    math.pi
+}
+
+ReconstructTable(testtable)
